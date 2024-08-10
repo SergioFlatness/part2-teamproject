@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>날씨와 뉴스, 그리고 사전</title>
+    <title>뉴스 및 날씨</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Jua&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
@@ -20,33 +20,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="container">
-    <div class="mainback-wrapper">
+    <img src="../mainpage_background.jpg" class="mainback-wrapper">
         <div class="mainback">
             <div class="container jua-regular">
                 <h1>날씨와 뉴스</h1>
                 <div id="weather" class="fixed-weather"></div>
-                <div class="button-container">
-                    
-                    
-                </div>
-                
+           
             </div>
         </div>
-    </div>
-    <h1 class="jua-regular">사전</h1>
+    </img>
+    <div>
+    <h2 class="jua-regular">사전</h2>
     <input class="jua-regular" type="text" id="word-input" placeholder="모르는 단어를 검색하세요!" />
     <button class="button2 jua-regular" onclick="lookupWord()"><span>검색</span></button>
     <div id="result" class="result-container jua-regular"></div>
-    <div class="jua-regular" id="content"></div>
 
+    <div class="jua-regular news-item" id="content"></div>
+</div>
     <a href="../teamproject_main/main.html"></a>
-    <nav class="button">
+    <div class="button">
         <div class="box">C</div>
         <div class="box">U</div>
         <div class="box">S</div>
         <div class="box">T</div>
         <div class="box">O</div>
-    </nav>
+    </div>
     
 
 
