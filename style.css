@@ -278,6 +278,9 @@ button {
     padding: 10px;
     border: 1px solid  #20232a;
     border-radius: 5px;
+    line-height: 20px;
+    width: 800px;
+    text-align: center;
 }
 
 .news-item a {
