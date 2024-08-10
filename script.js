@@ -28,12 +28,12 @@ function loadWeather() {
 
 
 const contentDiv = document.getElementById('content');
-fetch(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${newsAPIKey}`)
+fetch(`https://newsapi.org/v2/top-headlines?country=kr&pageSize=10&apiKey=${newsAPIKey}`)
     .then(response => response.json())
     .then(data => {
         contentDiv.innerHTML = '<h2>뉴스 헤드라인</h2>';
         data.articles.forEach(article => {
-            contentDiv.innerHTML += `<p>${article.title}</p>`;
+            contentDiv.innerHTML += `<div>${article.title}</div>`;
         });
     })
     .catch(error => {
