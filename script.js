@@ -6,7 +6,7 @@ const newsAPIKey = '8853b42cfa264087b27d071901006ce8';
 document.addEventListener('DOMContentLoaded', () => {
     loadWeather();
     document.getElementById('newsButton').addEventListener('click', loadNews);
-    document.getElementById('airQualityButton').addEventListener('click', loadTrends);
+    
 });
 
 function loadWeather() {
@@ -27,67 +27,55 @@ function loadWeather() {
 }
 
 
-const contentDiv = document.getElementById('content');
-fetch(`https://newsapi.org/v2/top-headlines?country=kr&pageSize=10&apiKey=${newsAPIKey}`)
-    .then(response => response.json())
-    .then(data => {
-        contentDiv.innerHTML = '<h2>뉴스 헤드라인</h2>';
-        data.articles.forEach(article => {
-            contentDiv.innerHTML += `<div>${article.title}</div>`;
-        });
-    })
-    .catch(error => {
-        console.error('뉴스 API 호출 오류:', error);
-        contentDiv.innerHTML = '뉴스 정보를 불러오는 데 실패했습니다.';
-    });
-
-
-function lookupWord() {
-    const word = document.getElementById('word-input').value;
-    const apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+function fetchNews() {
+    const apiKey = '8853b42cfa264087b27d071901006ce8';
+    const apiUrl = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${apiKey}`;
     
     fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Word not found');
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            displayResult(data);
+            const newsList = document.getElementById('news-list');
+            newsList.innerHTML = '';
+            data.articles.forEach(article => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <a href="${article.url}" target="_blank">
+                        
+                        ${article.title}
+                    </a>`;
+                newsList.appendChild(listItem);
+            });
         })
-        .catch(error => {
-            document.getElementById('result').innerHTML = `<p>${error.message}</p>`;
-        });
+        .catch(error => console.error('Error fetching news:', error));
 }
 
-function displayResult(data) {
-    const resultContainer = document.getElementById('result');
-    resultContainer.innerHTML = '';
-    
-    data.forEach(entry => {
-        const wordElement = document.createElement('h2');
-        wordElement.textContent = entry.word;
-        resultContainer.appendChild(wordElement);
+document.addEventListener('DOMContentLoaded', fetchNews);
+
+
+
+
+
+
+
+
+
+
+    function lookupWord() {
+        const word = document.getElementById('word-input').value;
+        const apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
         
-        entry.meanings.forEach(meaning => {
-            const partOfSpeech = document.createElement('h3');
-            partOfSpeech.textContent = meaning.partOfSpeech;
-            resultContainer.appendChild(partOfSpeech);
-            
-            meaning.definitions.forEach((definition, index) => {
-                const definitionElement = document.createElement('div');
-                definitionElement.classList.add('definition');
-                definitionElement.innerHTML = `<strong>Definition ${index + 1}:</strong> ${definition.definition}`;
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('dictionary-result');
+                resultDiv.innerHTML = ''; // 기존 결과 초기화
                 
-                if (definition.example) {
-                    const exampleElement = document.createElement('p');
-                    exampleElement.innerHTML = `<em>Example:</em> ${definition.example}`;
-                    definitionElement.appendChild(exampleElement);
+                if (data.title === "No Definitions Found") {
+                    resultDiv.innerHTML = '단어를 찾을 수 없습니다.';
+                } else {
+                    const meaning = data[0].meanings[0].definitions[0].definition;
+                    resultDiv.innerHTML = `<strong>${word}:</strong> ${meaning}`;
                 }
-                
-                resultContainer.appendChild(definitionElement);
-            });
-        });
-    });
-}
+            })
+            .catch(error => console.error('Error fetching dictionary data:', error));
+    }
