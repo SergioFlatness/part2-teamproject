@@ -8,8 +8,28 @@ body {
     position: relative;
     color: white;
     font-family: 'Arial', sans-serif;
-    
+    min-height: 120vh; 
 
+}
+
+
+
+h1 {
+    font-size: 2em;
+    color: white;
+    z-index: 10; /* 텍스트가 위에 오도록 z-index를 높게 설정 */
+    position: relative; /* z-index를 사용하기 위해 position 설정 */
+}
+
+
+
+
+
+
+
+li {
+    margin: 10px 0;
+    font-size: 10px;
 }
 
 .jua-regular {
@@ -17,6 +37,26 @@ body {
     font-weight: 400;
     font-style: normal;
   }
+
+
+
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.button-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.button-group li {
+    margin: 0 10px;
+}   
 
 
 
@@ -274,21 +314,42 @@ button {
 
 
 .news-item {
-    margin-bottom: 15px;
+    
     padding: 10px;
     border: 1px solid  #20232a;
     border-radius: 5px;
     line-height: 20px;
-    width: 800px;
+    width: 500px;
     text-align: center;
+    position: relative;
+    z-index: 1; /* 텍스트보다 아래로 설정 */
+    overflow-y: auto;
+    max-height: 70vh; /* 높이를 제한하여 스크롤 가능하도록 설정 */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    
+    
 }
 
-.news-item a {
-    text-decoration: none;
+
+
+
+
+
+
+
+
+
+
+
+
+
+.news-item li {
+    text-decoration-line: none;
     color: #30557e;
 }
-.news-item a:hover {
-    text-decoration: underline;
+.news-item li:hover {
+    text-decoration-line: none;
 }
 
 
@@ -380,7 +441,7 @@ button {
     background-size: cover; /* 배경 이미지가 전체 영역을 덮도록 설정 */
     background-position: center; /* 배경 이미지 중앙 정렬 */
     background-repeat: no-repeat; /* 배경 이미지 반복 방지 */
-    height: 130%; /* 부모 요소의 높이에 맞추기 */
+    height: 100%; /* 부모 요소의 높이에 맞추기 */
     width: 100%; /* 부모 요소의 너비에 맞추기 */
     display: flex;
     align-items: center; /* 세로 가운데 정렬 */
@@ -410,8 +471,61 @@ button {
 
 input[type="text"] {
     padding: 10px;
-    font-size: 10px;
-    width: 20%;
+    font-size: 20px;
+    width: 50%;
 
 
+}
+
+.neews{
+    text-decoration-line: none;
+    color: white;
+}
+
+
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    height: 50%;
+    
+}
+
+.dictionary-container, .news-container {
+    width: 70%;
+    margin-top: 70px;
+}
+
+.news-container {
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    overflow-y: auto;
+    max-height: 100vh;
+    z-index: 1;
+    margin-top: 50px;
+    width: 100%;
+
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+#dictionary-result {
+    margin-top: 20px;
+    font-size: 20px;
 }
